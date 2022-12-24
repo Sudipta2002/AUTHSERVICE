@@ -4,7 +4,7 @@ const { PORT } = require('./config/serverConfig');
 
 const prepareAndStartServer = () => {
     app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
+        console.log(`Server is running in port ${PORT}`);
     })
 }
 
