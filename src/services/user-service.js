@@ -19,12 +19,21 @@ class UserService {
             throw { error };
         }
     }
-    async getById(userId) {
+    async signIn(email, plainPassword) {
         try {
-            const user = await this.userRepository.getById(userId);
-            return user;
+            // step 1 --> fetch user using the email from repo
+            const user = await this.userRepository.getByEmail(email);
+            // step2 --> compare incoming plain password with stored ecypted password
+            const passwordsMatch = this.checkPassword(plainPassword, user.password);
+            if (!passwordsMatch) {
+                console.log("Password doesn't match");
+                throw { error: "Incorrect Password" };
+            }
+            // step 3 --> if  password match them create a token and send it to the user
+            const newToken = this.createToken({ email: user.email, id: user.id });
+            return newToken;
         } catch (error) {
-            console.log("Something went wrong on service layer");
+            console.log("Something went wrong in singIn on service layer");
             throw { error };
         }
     }
