@@ -57,7 +57,7 @@ class UserRepository {
                     name: 'ADMIN'
                 }
             });
-            // console.log(adminRole);
+            console.log(adminRole);
             return user.hasRole(adminRole);
         } catch (error) {
             console.log("Something went wrong on repository layer");
