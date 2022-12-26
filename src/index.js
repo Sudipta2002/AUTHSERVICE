@@ -6,6 +6,8 @@ const apiRoutes = require('./routes/index');
 const db = require('./models/index');
 // const UserRepository = require('./repository/user-repository');
 // const UserService = require('./services/user-service');
+
+const { User, Role } = require('./models/index');
 const prepareAndStartServer = async() => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,6 +26,10 @@ const prepareAndStartServer = async() => {
     // if (process.env.DB_SYNC) {
     //     db.sequelize.sync({ alter: true });
     // }
+    const u1 = await User.findByPk(3);
+    const r1 = await Role.findByPk(2);
+    // u1.addRole(r1);
+
     app.listen(PORT, () => {
         console.log(`Server is running in port ${PORT}`);
     })
