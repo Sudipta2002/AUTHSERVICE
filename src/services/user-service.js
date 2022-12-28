@@ -78,6 +78,9 @@ class UserService {
             }
             return user.id;
         } catch (error) {
+            if (error.name == 'ValidationError') {
+                throw error;
+            }
             console.log("Something went wrong on service layer", error);
             throw { error };
         }
